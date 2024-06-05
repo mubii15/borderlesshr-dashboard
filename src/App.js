@@ -8,11 +8,16 @@ function App() {
   const [data, setData] = useState([]);
   const [error, setError] = useState([]);
 
+  const axiosConfig = {
+    headers: {
+      'x-cors-api-key': 'temp_07d64a8e6426a9e0be97333c1404e957'
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://v3.base-borderless.com/api/transactions');
+        const response = await axios.get('https://proxy.cors.sh/https://v3.base-borderless.com/api/transactions', axiosConfig);
         if (response.data && response.data.data) {
           setData(response.data.data.transactions || []);
         } else {
@@ -24,6 +29,7 @@ function App() {
     };
     fetchData();
   }, []);
+
   return (
    <header className="d-flex justify-content-center align-items-center" style={{width: '100vw', overflow: 'hidden', background: 'rgba(255, 255, 255, 1)', minHeight: '100vh'}}>
   <div className="row" style={{width: '100%', height: '100%'}}>
